@@ -17,19 +17,22 @@
     session-id - a String, the ID of the target session
   Returns:
      - a MapEntry, [session-id {:ch the-channel :user-count n}]"
-  [session-id]
-  (find @live-sessions session-id))
+  {:added "0.1.0"}
+  ([session-id]
+   (find @live-sessions session-id)) )
 
 (defn get-session-map
   "Fetches a session's stored map, given its ID.
   Like get-session, but just returns the associated map"
-  [session-id]
-  (val (get-session session-id)))
+  {:added "0.1.0"}
+  ([session-id]
+   (val (get-session session-id))))
 
 (defn destroy-session!
   "Removes a session from the atom'd map"
-  [session-id]
-  (swap! live-sessions dissoc session-id))
+  {:added "0.1.0"}
+  ([session-id]
+   (swap! live-sessions dissoc session-id)))
  
 ;; Sessions are created with an auto-generated UUID, or a named session.
 ;; If the session already exists, you're returned it, otherwise,
@@ -47,8 +50,10 @@
     m - a Map, the stored session
   Notes:
     If the session already exists, it is returned."
-  ([] (create-session (com.eaio.uuid.UUID.)))
+  {:added "0.1.0"}
+  ([] (create-session (str (com.eaio.uuid.UUID.))))
   ([session-id]
+   {:pre [(string? session-id)]}
    (let-if [r (get-session session-id)]
      r
      (let [ch (lamina/channel)

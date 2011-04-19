@@ -10,5 +10,3 @@
       (lamina/siphon ch broadcast-channel)
       (lamina/siphon broadcast-channel ch))))
 
-(def server (future aleph/start-http-server loc-handler {:port 8888 :websocket true}))
-

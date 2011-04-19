@@ -18,6 +18,7 @@
                      [marginalia "0.5.0"]
                      ;[autodoc "0.7.1"]
                      ;[lein-multi "1.0.0"]
+                     [lein-run "1.0.1-SNAPSHOT"]
                      ;[org.clojars.mjul/lein-cuke "1.1.0"]
                      [com.stuartsierra/lazytest "2.0.0-SNAPSHOT"]]
   :repositories {"stuartsierra-releases" "http://stuartsierra.com/maven2"

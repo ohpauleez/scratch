@@ -1,5 +1,27 @@
+# Java related
 pom.xml
 *jar
-/lib/
+*.class
+
+# Leiningen
 /classes/
+/lib/
 .lein-deps-sum
+
+# Temp Files
+*.orig
+*~
+.*.swp
+.*.swo
+*.tmp
+
+# OS X
+.DS_Store
+
+# Logging
+*.log
+
+# Docs
+/autodoc/
+/docs/
+

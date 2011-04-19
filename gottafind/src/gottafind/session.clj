@@ -11,6 +11,12 @@
 ;;                   :user-count 10}}
 (def live-sessions (atom {}))
 
+
+;; All of these methods should be far more functional,
+;; taking a map-like structure as their first arg and applying functions
+;; to that.  Encapsulating the atom is just a means to get something up
+;; and running quickly
+
 (defn get-session
   "Fetch a session given its ID
   Arguments:

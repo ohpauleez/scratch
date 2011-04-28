@@ -12,6 +12,7 @@ GottaFind
 
 GottaFind is an anonymous location sharing application, built on HTML5 and Clojure.  
 It makes use of:
+
 * WebWorkers
 * WebSockets
 * HTML5 Location services

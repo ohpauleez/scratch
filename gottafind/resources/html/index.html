@@ -3,7 +3,12 @@
 <head>
 <title>GottaFind!</title>
 <link rel="stylesheet" href="css/styles.css">
+
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript" src="FABridge.js"></script>
+<script type="text/javascript" src="web_socket.js"></script>
 </head>
+
 <body onload="loadDemo()">
 
 <h1>HTML5 WebSocket / Geolocation Tracker</h1>
@@ -13,9 +18,13 @@
 
 <script>
 
+    // Set URL of your WebSocketMain.swf here
+    WebSocket.__swfLocation = "WebSocketMain.swf";
+
     // reference to the Web Socket
     var socket;
 
+    // Replace this with Server-Side setting
     // a semi-unique random ID for this session
     var myId = Math.floor(100000*Math.random());
 
@@ -49,8 +58,9 @@
     }
 
     function loadDemo() {
-        // test to make sure that Web Sockets are supported
-        if (window.WebSocket) {
+        // test to make sure that Web Sockets are supported...
+        // Note: We no longer need to check since the flash failover does it automatically
+        //if (window.WebSocket) {
 
             // the location of our broadcast WebSocket server
             url = "ws://localhost:8888";
@@ -61,7 +71,7 @@
             socket.onmessage = function(e) {
                 updateSocketStatus("Updated location from " + dataReturned(e.data));
             }
-        }
+        //}
 
         var geolocation;
         if(navigator.geolocation) {

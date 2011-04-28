@@ -32,6 +32,8 @@ TODO
 
 TODO
 ====
+* websocket failover
+* websocket work should be done in a webworker
 
 
 Hacking

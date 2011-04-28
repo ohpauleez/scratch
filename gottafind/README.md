@@ -32,8 +32,10 @@ TODO
 
 TODO
 ====
-* websocket failover
+
 * websocket work should be done in a webworker
+* polished aleph stack
+* Google Maps integration
 
 
 Hacking

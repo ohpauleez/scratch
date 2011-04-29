@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GottaFind!</title>
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body onload="initGottaFind()">
+
+<h1>HTML5 WebSocket / Geolocation Tracker</h1>
+
+<div><strong>Your Location Worker</strong>: <p id="worker">HTML5 Web Workers are <strong>not</strong> supported in your browser.</p></div>
+<button id="stopButton">Stop Location Sharing</button>
+<button onclick="document.location = document.location;">Reload/Refresh</button>
+
+<div><strong>Geolocation</strong>: <p id="geoStatus">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p></div>
+<div><strong>WebSocket</strong>: <p id="socketStatus">HTML5 Web Sockets are <strong>not</strong> supported in your browser.</p></div>
+
+<script>
+
+function stopLocWorker() {
+    locWorker.terminate();
+}
+
+function updateSocketStatus(message) {
+    document.getElementById("socketStatus").innerHTML = message;
+}
+
+function updateGeolocationStatus(message) {
+    document.getElementById("geoStatus").innerHTML = message;
+}
+
+function messageHandler(e) {
+    var messageType = e.data.type;
+    switch (messageType) {
+        case ("socket"):
+            if (!e.data.loc) {
+                updateSocketStatus(e.data.update);
+            } else {
+                updateSocketStatus("Updated location from: " + dataReturned(e.data.loc, e.data.id));
+            }
+            break;
+        case ("geo"):
+            updateGeolocationStatus(e.data.update);
+            break;
+    }
+}
+
+function errorHandler(e) {
+    console.log(e.message, e);
+}
+
+function initGottaFind() {
+    if (typeof(Worker) !== "undefined") {
+        document.getElementById("worker").innerHTML = "GottaFind is active";
+
+        locWorker = new Worker("location.js");
+        locWorker.addEventListener("message", messageHandler, true);
+        locWorker.addEventListener("error", errorHandler, true);
+
+        document.getElementById("stopButton").onclick = stopLocWorker;
+    }
+}
+
+function dataReturned(locationData, myId) {
+    // break the data into ID, latitude, and longitude
+    var allData = JSON.parse(locationData);
+    var incomingId   = allData[1];
+    var incomingLat  = allData[2];
+    var incomingLong = allData[3];
+
+    // locate the HTML element for this ID
+    // if one doesn't exist, create it
+    var incomingRow = document.getElementById(incomingId);
+    if (!incomingRow) {
+        incomingRow = document.createElement('div');
+        incomingRow.setAttribute('id', incomingId);
+
+        incomingRow.userText = (incomingId == myId) ?
+                                    'Me'            :
+                                    'User ' + rowCount;
+
+        rowCount++;
+
+        document.body.appendChild(incomingRow);
+    }
+
+    // update the row text with the new values
+    incomingRow.innerHTML = incomingRow.userText + " \\ Lat: " +
+                            incomingLat + " \\ Lon: " +
+                            incomingLong;
+
+    return incomingRow.userText;
+}
+</script>
+</body>
+</html>

@@ -33,7 +33,6 @@ TODO
 TODO
 ====
 
-* websocket work should be done in a webworker
 * polished aleph stack
 * Google Maps integration
 

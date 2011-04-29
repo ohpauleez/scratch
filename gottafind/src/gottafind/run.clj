@@ -16,7 +16,8 @@
       and is only meant for launching the server via the repl or lein-run"
   ([]
    (start-http http-default-port))
-  ([port]))
+  ([port]
+   (aleph/start-http-server gfc/web-handler {:port port})))
 
 (defn start-ws
   "Start the websocket server.

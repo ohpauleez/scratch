@@ -53,7 +53,7 @@
   Arguments:
     [session-id] - a String, the session's identifier. [auto-generated UUID]
   Returns:
-    m - a Map, the stored session
+    m - a MapEntry, the stored session
   Notes:
     If the session already exists, it is returned."
   {:added "0.1.0"}

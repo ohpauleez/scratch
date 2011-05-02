@@ -6,17 +6,28 @@
 
 (def broadcast-channel (lamina/channel))
 
+(defn serve-static [resp filename]
+  {:status 200
+   :headers {"content-type" "text/plain"}
+   :body (str "Serve the JS and CSS from this function: " filename) })
+
 (defn serve-session [resp-ch request session-id]
-  "LOOK AT MATCHLEND TO SEE HOW TO PASS THE SESSION IN")
+  (lamina/enqueue resp-ch
+    {:status 200
+     :headers {"content-type" "text/plain"}
+     :body (str "I got the following session: " session-id)}))
 
 (defn init-session [resp-ch request]
-  (future (let [session-id (session/create-session!)]
-            (serve-session resp-ch request session-id))))
+  (future (let [session-entry (session/create-session!)]
+            (serve-session resp-ch request (key session-entry)))))
 
 (def web-handler
-  (app
-    [""] {:get (aleph/wrap-aleph-handler init-session)}
-    [session-key] {:get (aleph/wrap-aleph-handler serve-session)}))
+  (aleph/wrap-ring-handler
+    (app
+      [#"css|js" filename] {:get (fn [resp] (serve-static resp filename))} ;this should get handled by the webserver really
+      [session-id] {:get (aleph/wrap-aleph-handler (fn [ch req] (serve-session ch req session-id)))}
+      [""] {:get (aleph/wrap-aleph-handler init-session)}
+      )))
 
 (defn loc-handler [ch handshake]
   (lamina/receive ch

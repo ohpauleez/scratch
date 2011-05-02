@@ -9,6 +9,7 @@
                  [org.clojure/clojure "1.2.1"]
                  [aleph "0.1.5-SNAPSHOT"]
                  [net.cgrand/moustache "1.0.0"]
+                 [ring/ring-core "0.3.8"]
                  ;[clj-json "0.3.1"]
                  [com.eaio.uuid/uuid "3.2"]]
   :dev-dependencies [[vimclojure/server "2.3.0-SNAPSHOT"]

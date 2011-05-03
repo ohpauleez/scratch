@@ -18,8 +18,8 @@
 <script>
 
     // Set URL of your WebSocketMain.swf here
-    //WebSocket.__swfLocation = "/swf/WebSocketMain.swf";
-    WEB_SOCKET_SWF_LOCATION = "/swf/WebSocketMain.swf"; 
+    WEB_SOCKET_SWF_LOCATION = "/swf/WebSocketMain.swf";
+    //WEB_SOCKET_SWF_LOCATION = "/swf/WebSocketMainInsecure.swf"; //this is you're hosting the swf and html from different origins
     WEB_SOCKET_DEBUG = true;
 
     // reference to the Web Socket
@@ -95,9 +95,9 @@
 
         // Send my location via WebSocket
         var toSend = JSON.stringify([myId, latitude, longitude]);
-        if (socket.readyState === 1) { //socket is open
+        if (socket.readyState == 'open' || socket.readyState == 1) { //socket is open
             sendMyLocation(toSend);
-        } else if (socket.readyState === 0) {
+        } else if (socket.readyState == 'connecting' || socket.readyState == 0) {
             updateSocketStatus("WebSocket is still attempting to connect; Unable to send location information...");
         }
     }

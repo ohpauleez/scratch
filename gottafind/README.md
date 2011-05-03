@@ -22,8 +22,19 @@ as well as a platform for new location innovations.
 
 Usage and Examples
 ==================
-TODO
+You can launch the Aleph Webserver and Web Socket server with:
+    lein run :server gf
+This will serve http requests on 8080, and web socket traffic on 8888.  
+Now you should be able to browse to:
+    http://localhost:8080
+to use the webapp.  
 
+You can optionally start just the http server
+    lein run :server http
+Or just the web socket server:
+    lein run :server ws
+
+Web socket traffic will be sent via a Flash socket if your browser does not supper web sockets.
 
 
 Installation
@@ -40,7 +51,6 @@ TODO
 TODO
 ====
 
-* Add easy running via lein-run, update docs
 * debug websocket server issues
 * fix uncaught: `INVALID_STATE_ERR` on Web Socket
 * integrate sessions correctly into aleph

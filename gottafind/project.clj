@@ -21,7 +21,6 @@
                      [marginalia "0.5.0"]
                      [org.clojars.rayne/autodoc "0.8.0-SNAPSHOT"]
                      ;[lein-multi "1.0.0"]
-                     [lein-run "1.0.1-SNAPSHOT"]
                      ;[org.clojars.mjul/lein-cuke "1.1.0"]
                      [com.stuartsierra/lazytest "2.0.0-SNAPSHOT"]]
   :repositories {"stuartsierra-releases" "http://stuartsierra.com/maven2"
@@ -29,6 +28,7 @@
   ;:hooks  [leiningen.hooks.cdt]
   ;:cdt-debug-port 8022
   ;:warn-on-reflection true
+  :run-aliases {:server gottafind.run}
   ;:jvm-opts ["-Xmx1g"]
   ;:jvm-opts ["-server" "-Xmx1g" "-XX:+UseConcMarkSweepGC" "-XX:+UseParNewGC" "-XX:+UseCompressedOops"]
   ;:jvm-opts ["-server" "-Xmx50mb" "-XX:+UseConcMarkSweepGC" "-XX:+UseParNewGC" "-XX:+UseCompressedOops"]

@@ -49,5 +49,6 @@
   (condp = server-type
     "ws"    (start-ws (or port ws-default-port))
     "http"  (start-http (or port http-default-port))
+    "gf"    (start-gottafind)
     (println "\nError: That server-type is not recogized")))
 

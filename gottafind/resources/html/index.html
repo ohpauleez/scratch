@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="css/styles.css">
 
 <script type="text/javascript" src="/js/swfobject.js"></script>
-<script type="text/javascript" src="/js/FABridge.js"></script>
 <script type="text/javascript" src="/js/web_socket.js"></script>
 </head>
 
@@ -19,7 +18,9 @@
 <script>
 
     // Set URL of your WebSocketMain.swf here
-    WebSocket.__swfLocation = "/swf/WebSocketMain.swf";
+    //WebSocket.__swfLocation = "/swf/WebSocketMain.swf";
+    WEB_SOCKET_SWF_LOCATION = "/swf/WebSocketMain.swf"; 
+    WEB_SOCKET_DEBUG = true;
 
     // reference to the Web Socket
     var socket;

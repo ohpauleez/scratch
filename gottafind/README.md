@@ -52,7 +52,6 @@ TODO
 ====
 
 * debug websocket server issues
-* fix uncaught: `INVALID_STATE_ERR` on Web Socket
 * integrate sessions correctly into aleph
 * Google Maps integration
 * style

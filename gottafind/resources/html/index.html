@@ -94,12 +94,18 @@
 
         // Send my location via WebSocket
         var toSend = JSON.stringify([myId, latitude, longitude]);
-        sendMyLocation(toSend);
+        if (socket.readyState === 1) { //socket is open
+            sendMyLocation(toSend);
+        } else if (socket.readyState === 0) {
+            updateSocketStatus("WebSocket is still attempting to connect; Unable to send location information...");
+        }
     }
 
     function sendMyLocation(newLocation) {
         if (socket) {
-            socket.send(newLocation);
+            try {
+                socket.send(newLocation);
+            } catch (e) {} // The websocket readyState is still CONNECTING/0
         }
     }
 

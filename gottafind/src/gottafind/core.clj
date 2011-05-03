@@ -6,6 +6,13 @@
             [gottafind.session :as session]))
 
 (def broadcast-channel (lamina/channel))
+(def print-ch (lamina/channel))
+
+(def flash-policy-resp "<?xml version=\"1.0\"?>
+                       <!DOCTYPE cross-domain-policy SYSTEM \"http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd\">
+                       <cross-domain-policy>
+                       <allow-access-from domain='*' to-ports='*' />
+                       </cross-domain-policy>\n\n\0")
 
 ;; this is only done for extra control over the filetype
 ;; The route could have easily been done:
@@ -24,9 +31,12 @@
     (ring/response (str "I got the following session: " session-id))))
 
 (defn init-session [request]
-  (future (if-let [session-entry (session/create-session!)]
+  #_(future (if-let [session-entry (session/create-session!)] ; when done in a future, aleph will pass nil back
             (ring/redirect (str "/" (key session-entry)))
-            (ring/status (ring/response "Unable to create a session") 406))))
+            (ring/status (ring/response "Unable to create a session") 406)))
+  (if-let [session-entry (session/create-session!)]
+    (ring/redirect (str "/session/" (key session-entry)))
+    (ring/status (ring/response "Unable to create a session") 406)))
 
 (def web-handler
   (aleph/wrap-ring-handler
@@ -42,6 +52,17 @@
 (defn loc-handler [ch handshake]
   (lamina/receive ch
     (fn [location]
-      (lamina/siphon ch broadcast-channel)
-      (lamina/siphon broadcast-channel ch))))
+      (if (= location "<policy-file-request/>\0")
+        (do
+          (lamina/siphon ch broadcast-channel)
+          (lamina/enqueue ch flash-policy-resp)
+          (lamina/siphon broadcast-channel ch)))
+        (do 
+          (lamina/siphon ch broadcast-channel)
+          (lamina/siphon broadcast-channel ch)))))
+
+(defn flash-policy-handler [ch client-info]
+  (lamina/receive-all ch
+    #(when (= % "<policy-file-request/>\0")
+       (lamina/enqueue-and-close ch flash-policy-resp))))
 

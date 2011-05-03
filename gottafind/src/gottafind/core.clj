@@ -13,7 +13,9 @@
 (defn serve-static [resp filename] 
   (if-let [resp (and 
                   (or (.endsWith filename "js") (.endsWith filename "css"))
-                  (ring/resource-response (:uri resp)))]
+                  (ring/content-type (ring/resource-response (:uri resp))
+                                     (str "text/" (last (clojure.string/split
+                                                          filename #"\.")))))]
     resp
     (ring/status (ring/response "file not found") 404)))
 
@@ -29,9 +31,13 @@
 (def web-handler
   (aleph/wrap-ring-handler
     (app
-      [#"css|js" filename] {:get (fn [resp] (serve-static resp filename))} ;this should get handled by the webserver really
-      [session-id] {:get (aleph/wrap-aleph-handler (fn [ch req] (serve-session ch req session-id)))}
-      [""] {:get init-session})))
+      ;; the index page will actually get moved to the session lookup page, and index will be a landing page
+      ;; or, index will just forard to the session page like it did before.
+      [""] {:get (fn [resp] (ring/resource-response "html/index.html"))} ;this should get handled by the webserver/nginx really
+      [#"css|js" filename] {:get (fn [resp] (serve-static resp filename))} ;this should get handled by the webserver/nginx really
+      [#"swf" filename] {:get (fn [resp] (ring/resource-response (:uri resp)))}
+      ["session"] {:get init-session} ;this should probably be a POST
+      ["session" session-id] {:get (aleph/wrap-aleph-handler (fn [ch req] (serve-session ch req session-id)))})))
 
 (defn loc-handler [ch handshake]
   (lamina/receive ch

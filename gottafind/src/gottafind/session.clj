@@ -53,19 +53,20 @@
   Arguments:
     [session-id] - a String, the session's identifier. [auto-generated UUID]
   Returns:
-    m - a Map, the stored session
+    m - a MapEntry, the stored session
   Notes:
     If the session already exists, it is returned."
   {:added "0.1.0"}
-  ([] (create-session (str (com.eaio.uuid.UUID.))))
+  ([] (create-session! (str (com.eaio.uuid.UUID.))))
   ([session-id]
    {:pre [(string? session-id)]}
-   (let-if [r (get-session session-id)]
-     r
+   (if-let [r (get-session session-id)]
+     r ; this used to be r, which is why if-let is used
      (let [ch (lamina/channel)
            callback (fn [] (if (< ((get-session-map session-id) :user-count) 1)
-                       (destroy-session session-id)
+                       (destroy-session! session-id)
                        (swap! live-sessions update-in [session-id :user-count] dec)))
-           on-close-r (lamina/on-close ch callback)] 
-       (swap! live-sessions assoc session-id {:ch ch, :user-count 0})))))
+           on-close-r (lamina/on-closed ch callback)
+           fresh-map (swap! live-sessions assoc session-id {:ch ch, :user-count 0})]
+        (clojure.lang.MapEntry. session-id (fresh-map session-id))))))
 

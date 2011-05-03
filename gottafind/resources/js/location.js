@@ -1,9 +1,10 @@
 
-importScripts("swfobject.js", "FABridge.js", "web_socket.js");
+importScripts("swfobject.js", "web_socket.js");
 
 
 // Set URL of your WebSocketMain.swf here
-WebSocket.__swfLocation = "WebSocketMain.swf";
+WEB_SOCKET_SWF_LOCATION = "/swf/WebSocketMain.swf"; 
+WEB_SOCKET_DEBUG = true;
 
 // reference to the Web Socket
 var socket;

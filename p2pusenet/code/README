@@ -1,0 +1,51 @@
+
+PLEASE NOTE YOU NEED TO DEFINE AN ENVIRONMENT VARIABLE FOR JAVA_HOME
+
+====
+Manifest
+============
+build - This directory is used during the build process to dump classes
+	to and construct the distributable jar.  You should not manually add
+	classes to it and you should not removed anything from it.  To interact
+	with this directory use ONLY the Makefile.
+
+dist - This directory is used to build the executable distribution of the
+	the final product.  As with the build directory, you should never
+	manually edit this directory and only use it through Makefile actions.
+	The contents of this directory are tar-gzipped to create a shippable
+	product
+
+lib - the directory that holds all third-party jars and needed libraries.
+	Nothing should be removed from here unless all developers agree on it
+
+src - this directory hold all the source code for the project.  All major
+	and abstract classes should be at the top level.  Interfaces should
+	also be placed at the top level
+
+	src/Events - This directory holds special event types for the event
+		bus
+
+	src/scripts - This directory holds scripts for use with the Java6
+		scripting API.
+
+
+====
+Running and Notes
+===================
+
+To see an example of the system please type:
+make run-text
+
+(make-run redirects to this, but will issue you a warning)
+This will build the system and run the text example.
+The P2P network will prompt you to configure you connection
+Please enter a username and password of 8 characters or more
+Click on the next tab and select "Act as a Relay" and "Act as a Rendezvous"
+Click on the next tab after that and deselect "Use a relay"
+
+After that, click ok and watch your screen, the system and demo takes about
+5 minutes to complete.
+
+It shows you adding messages to the P2P network, adding them to your datastore
+searching the network, and running a plugin written in ruby
+

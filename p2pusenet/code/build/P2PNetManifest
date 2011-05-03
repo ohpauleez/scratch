@@ -1,0 +1,3 @@
+Main-Class: P2PNet
+Class-Path: ../lib/*.jar 
+

@@ -1,0 +1,14 @@
+
+====
+ Manifest
+============
+
+code - This directory holds all resources revolving around the code
+	and executable distribution of the P2PNet project
+
+doc - This directory contains all documentation for the project
+
+extra - This directory contains all tutorials or supplemental
+	resources for tools, libraries, language features, and frameworks 
+	our P2PNet system utilizes.
+

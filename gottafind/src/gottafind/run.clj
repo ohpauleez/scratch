@@ -31,7 +31,7 @@
   ([]
    (start-ws ws-default-port))
   ([port]
-   aleph/start-http-server gfc/loc-handler {:port port :websocket true}))
+   (aleph/start-http-server gfc/loc-handler {:port port :websocket true})))
 
 (defn start-gottafind
   "Start the websocket server and the http server, on their default ports

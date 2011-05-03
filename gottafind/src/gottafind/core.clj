@@ -43,7 +43,7 @@
     (app
       ;; the index page will actually get moved to the session lookup page, and index will be a landing page
       ;; or, index will just forard to the session page like it did before.
-      [""] {:get (fn [resp] (ring/resource-response "html/index.html"))} ;this should get handled by the webserver/nginx really
+      [""] {:get (fn [resp] (ring/resource-response "index.html"))} ;this should get handled by the webserver/nginx really
       [#"css|js" filename] {:get (fn [resp] (serve-static resp filename))} ;this should get handled by the webserver/nginx really
       [#"swf" filename] {:get (fn [resp] (ring/resource-response (:uri resp)))}
       ["session"] {:get init-session} ;this should probably be a POST

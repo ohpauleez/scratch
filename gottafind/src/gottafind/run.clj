@@ -2,7 +2,9 @@
       :author "Paul deGrandis"}
   gottafind.run
   (:require [gottafind.core :as gfc]
-            [aleph.http :as aleph]))
+            [aleph.http :as aleph]
+            [aleph.tcp :as alephtcp]
+            [gloss.core :as gloss]))
 
 (def ws-default-port 8888)
 (def http-default-port 8080)
@@ -31,7 +33,12 @@
   ([]
    (start-ws ws-default-port))
   ([port]
-   aleph/start-http-server gfc/loc-handler {:port port :websocket true}))
+   (aleph/start-http-server gfc/loc-handler {:port port :websocket true})))
+
+(defn start-policy
+  ""
+  []
+  (alephtcp/start-tcp-server gfc/flash-policy-handler {:port 843, :frame (gloss/string  :utf-8 :delimiters  ["\r\n"])}))
 
 (defn start-gottafind
   "Start the websocket server and the http server, on their default ports
@@ -45,10 +52,16 @@
         http (start-http)]
     [http ws]))
 
+(defn start-gottafind-root
+  []
+  (conj (start-gottafind) (start-policy)))
+
 (defn -main [& [server-type port]]
   (condp = server-type
-    "ws"    (start-ws (or port ws-default-port))
-    "http"  (start-http (or port http-default-port))
-    "gf"    (start-gottafind)
+    "ws"      (start-ws (or port ws-default-port))
+    "http"    (start-http (or port http-default-port))
+    "policy"  (start-policy)
+    "gf"      (start-gottafind)
+    "gf-root" (start-gottafind-root)
     (println "\nError: That server-type is not recogized")))
 

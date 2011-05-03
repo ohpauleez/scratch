@@ -7,10 +7,17 @@ Much like how one shares code or text samples using Gist and Pastie, GottaFind l
 ### Why would you share your location?
 I travel a lot, and often times when traveling somewhere, I am planning on meeting up with someone. 
 I'm not always familiar with the cities I visit, so I can have a difficult time locating my contact.  
-GottaFind let's me instantly create a realtime location sharing session that my contact and I can use to locate each other.  
+GottaFind lets me instantly create a realtime location sharing session that my contact and I can use to locate each other.  
 
 Other times I'll be at conferences, large business events, or parties, and I have a hard time locating a friend. 
 GottaFind let's me find anyone I'm trying to meetup with safely, securely, and anonymously.
+
+### Isn't this similar to Geoloqi?  What makes this better?
+
+* GottaFind is a DEAD simple service designed to do one thing well.
+* It should serve as working and living example of HTML5 technologies for all developers,
+as well as a platform for new location innovations.
+* Extra effort is made to show backend integration as well as deployment and scaling strategies.
 
 
 Usage and Examples
@@ -33,8 +40,12 @@ TODO
 TODO
 ====
 
-* polished aleph stack
+* Add easy running via lein-run, update docs
+* debug websocket server issues
+* fix uncaught: `INVALID_STATE_ERR` on Web Socket
+* integrate sessions correctly into aleph
 * Google Maps integration
+* style
 
 
 Hacking

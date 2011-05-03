@@ -1,0 +1,12 @@
+
+
+ExampleOne.java serves as a simple way for you to see how to get a ScriptingEngine
+within Java6, set it up, call and run scripting, manage and manipulate the global
+space of a ScriptingEngine, get values from the ScriptingEngine and from methods.
+It uses ruby (jruby) as the example engine, but DetailedExample shows ruby, python,
+and scheme.  Support for haskell also exists.  For more language support, examples,
+or more information about jsr 223, look on the internet
+
+
+Paul
+

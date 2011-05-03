@@ -1,0 +1,5 @@
+
+To use ruby or python, you need get a library of ruby or python files.  Rather than check these in
+(as there are a lot of them) I had gzipped them and put them here, simple copy the gzip you want to
+trunk/code/lib, upzip it, and delete the gzip.  DO NOT ADD THIS NEW DIRECTORY UNDER SVN.
+

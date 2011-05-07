@@ -52,9 +52,13 @@ TODO
 ====
 
 * debug websocket server issues
+* if the flash ws failover fails too (or stalls), but webworkers are available, failover to XMLHTTPRequest POSTs only when location changes.
 * integrate sessions correctly into aleph
+* Add toggles to share location and get location updates (when off, add manual update buttons)
 * Google Maps integration
+* Add app cache support to speedup load times and allow for intermittent connections
 * style
+* If you add multiple pages, use Session Store to save the location.
 
 
 Hacking

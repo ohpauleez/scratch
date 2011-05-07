@@ -1,6 +1,6 @@
 (defproject gottafind "0.1.0-SNAPSHOT"
   :description "A location sharing servive"
-  :url "http://github.com/ohpauleez/scratch/gottafind"
+  :url "https://github.com/ohpauleez/scratch/tree/master/gottafind"
   :license {:name "Eclipse Public License - v 1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo
@@ -25,6 +25,11 @@
                      [com.stuartsierra/lazytest "2.0.0-SNAPSHOT"]]
   :repositories {"stuartsierra-releases" "http://stuartsierra.com/maven2"
                  "stuartsierra-snapshots" "http://stuartsierra.com/m2snapshots"}
+  :autodoc {:name "GottaFind"
+            :copyright "Paul deGrandis under EPL 1.0"
+            :web-home "https://github.com/ohpauleez/scratch/tree/master/gottafind"
+            :web-src-dir "https://github.com/ohpauleez/scratch/tree/master/gottafind"
+            :output-path "docs"}
   ;:hooks  [leiningen.hooks.cdt]
   ;:cdt-debug-port 8022
   ;:warn-on-reflection true

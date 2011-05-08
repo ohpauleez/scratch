@@ -25,6 +25,20 @@
     // reference to the Web Socket
     var socket;
 
+    // if defined, this will store the postion of all users in the current session
+    var storage;
+    if (typeof(window.sessionStorage !== "undefined")) {
+        storage = window.sessionStorage;
+
+        // Update the values we find in the session storage
+        for (i in storage) {
+            user_key = storage.key(i);
+            // if you use localStorage instead, you could namespace your keys.. eg. gottafind_USERID
+            user_data = JSON.parse(storage[user_key]);
+            displayData(user_key, user_data[2], user_data[3]);
+        }
+    }
+
     // Replace this with Server-Side setting
     // a semi-unique random ID for this session
     var myId = Math.floor(100000*Math.random());
@@ -116,6 +130,14 @@
         var incomingId   = allData[1];
         var incomingLat  = allData[2];
         var incomingLong = allData[3];
+
+        if (storage !== 'undefined') {
+            storage[incomingId] = locationData;
+        }
+        displayData(incomingId, incomingLat, incomingLong);
+    }
+
+    function displayData(incomingId, incomingLat, incomingLong) {
 
         // locate the HTML element for this ID
         // if one doesn't exist, create it

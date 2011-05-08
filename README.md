@@ -16,6 +16,7 @@ It makes use of:
 * WebWorkers
 * WebSockets
 * HTML5 Geolocation
+* LocalSession
 * Aleph - async web server
 * Clojure's concurrency mechanisms
 

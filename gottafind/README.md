@@ -58,7 +58,6 @@ TODO
 * Google Maps integration
 * Add app cache support to speedup load times and allow for intermittent connections
 * style
-* If you add multiple pages, use Session Store to save the location.
 
 
 Hacking

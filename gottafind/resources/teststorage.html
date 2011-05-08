@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GottaFind!</title>
+<link rel="stylesheet" href="css/styles.css">
+
+<script type="text/javascript" src="/js/swfobject.js"></script>
+<script type="text/javascript" src="/js/web_socket.js"></script>
+</head>
+
+<body>
+
+<h1>HTML5 WebSocket / Geolocation Tracker</h1>
+
+<h3>STORAGE RESULTS ONLY</h3>
+<div><p id="storedSession">session info..</p></div>
+<div><strong>Geolocation</strong>: <p id="geoStatus">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p></div>
+<div><strong>WebSocket</strong>: <p id="socketStatus">HTML5 Web Sockets are <strong>not</strong> supported in your browser. Attempting to use Flash as a fallback</p></div>
+
+<script>
+    var storage;
+    if (typeof(window.sessionStorage !== "undefined")) {
+        storage = window.sessionStorage;
+
+        // Update the values we find in the session storage
+        var session_stat "";
+        for (i in storage) {
+            user_key = storage.key(i);
+            session_stat += user_key + ": " + storage[user_key] + "  //  ";
+            // if you use localStorage instead, you could namespace your keys.. eg. gottafind_USERID
+        }
+        document.getElementById("storedSession").innerHTML = session_stat;
+    }
+
+</script>

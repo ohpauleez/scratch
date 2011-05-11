@@ -20,3 +20,13 @@
 (defmacro dbg [x]
   `(let  [x# ~x]  (println "dbg:" '~x "=" x#) x#))
 
+;This doesn't really belong here, but I don't want to lose it.
+;This is macro to express imperative style loops
+;It's only really helpful for readability for someone not
+;familiar with lisps and Clojure
+(defmacro iloop [[b t n] & body]
+  `(loop [~@b]
+     (when ~t
+       ~@body
+       (recur ~n))))
+

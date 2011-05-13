@@ -57,7 +57,7 @@
   (conj (start-gottafind) (start-policy)))
 
 (defn -main [& [server-type port]]
-  (condp = server-type
+  (case server-type
     "ws"      (start-ws (or port ws-default-port))
     "http"    (start-http (or port http-default-port))
     "policy"  (start-policy)

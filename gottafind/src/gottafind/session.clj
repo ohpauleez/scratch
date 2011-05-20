@@ -12,10 +12,10 @@
 ;;      {"123-some-uuid" {:ch (lamina/channel)
 ;;                        :user-count 10}}
 ;;
-;; By default, the sessions store can't be rebound,
-;; but you can support multiple session stores by allowing this
-;; and using `bind`
-(def ^{:dynamic false} *live-sessions* (atom {}))
+;; The sessions store can be rebound,
+;; to support multiple session stores by using `bind`
+(def ^{:dynamic true} *live-sessions* (atom {}))
+;(def ^:dynamic *live-sessions* (atom {})) ; Clojure 1.3 shorthand
 
 
 ;; ## CRUD operations

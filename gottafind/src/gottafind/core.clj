@@ -27,14 +27,14 @@
 ; This is only done for extra control over the filetype
 ; The route could have easily been done:
 ; [#"css|js" "filename"] {:get (fn  [resp] (ring/resource-response (:uri resp)))}
-; (defn serve-static [resp filename] 
-;   (if-let [resp (and 
-;                   (or (.endsWith filename "js") (.endsWith filename "css"))
-;                   (ring/content-type (ring/resource-response (:uri resp))
-;                                      (str "text/" (last (clojure.string/split
-;                                                           filename #"\.")))))]
-;     resp
-;     (ring/status (ring/response "file not found") 404)))
+ (defn serve-static [resp filename]
+   (if-let [resp (and
+                   (or (.endsWith filename "js") (.endsWith filename "css"))
+                   (ring/content-type (ring/resource-response (:uri resp))
+                                      (str "text/" (last (clojure.string/split
+                                                           filename #"\.")))))]
+     resp
+     (ring/status (ring/response "file not found") 404)))
 
 ;; ## Route Actions
 
@@ -77,7 +77,11 @@
   (aleph/wrap-ring-handler
     (app
       [""] {:get (fn [resp] (ring/resource-response "index.html"))}
-      [#"css|js|swf" filename] {:get (fn [resp] (ring/resource-response (:uri resp)))}
+      ["teststorage"] {:get (fn [resp] (ring/resource-response "teststorage.html"))}
+      ;[#"css|js|swf" filename] {:get (fn [resp] (ring/resource-response (:uri resp)))} ; this produces binary data resp only
+      [#"css|js" filename] {:get (fn [resp] (serve-static resp (:uri resp)))}
+      [#"swf" filename] {:get (fn [resp] (ring/content-type (ring/resource-response (:uri resp))
+                                                            "application/x-shockwave-flash"))}
       ["session"] {:get init-session} ;this should probably be a POST
       ["session" session-id] {:get (aleph/wrap-aleph-handler (fn [ch req] (serve-session ch req session-id)))})))
 

@@ -10,7 +10,7 @@
 
 <body onload="loadDemo()">
 
-<h1>GottaFind!</h1>
+    <h1>GottaFind!</h1>
 
     <p>GottaFind! is a location sharing service.  It is designed
     to serve as an example of HTML5 functionality.  Please see the
@@ -28,10 +28,17 @@
     WEB_SOCKET_DEBUG = true;
 
     // reference to the Web Socket
-    var socket;
+    var socket,
 
     // if defined, this will store the postion of all users in the current session
-    var storage;
+    storage;
+    // Replace this with Server-Side setting
+    // a semi-unique random ID for this session
+        myId = Math.floor(100000*Math.random());
+
+    // number of rows of data presently displayed
+        rowCount = 0;
+
     if (typeof(window.sessionStorage !== "undefined")) {
         storage = window.sessionStorage;
 
@@ -44,13 +51,7 @@
         }
     }
 
-    // Replace this with Server-Side setting
-    // a semi-unique random ID for this session
-    var myId = Math.floor(100000*Math.random());
-
-    // number of rows of data presently displayed
-    var rowCount = 0;
-
+    
     function updateSocketStatus(message) {
         document.getElementById("socketStatus").innerHTML = message;
     }

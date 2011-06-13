@@ -23,19 +23,29 @@ as well as a platform for new location innovations.
 Usage and Examples
 ==================
 You can launch the Aleph Webserver and Web Socket server with:
+      
     lein run :server gf
+
 This will serve http requests on 8080, and web socket traffic on 8888.  
 Now you should be able to browse to:
+
     http://localhost:8080
+
 to use the webapp.  
 
 You can optionally start just the http server
+      
     lein run :server http
+
 Or just the web socket server:
+      
     lein run :server ws
 
 Web socket traffic will be sent via a Flash socket if your browser does not supper web sockets.
 
+If you just want to experiment with the raw HTML5 files, you can run:
+
+    python -m SimpleHTTPServer 8080
 
 Installation
 ============
@@ -51,9 +61,8 @@ TODO
 TODO
 ====
 
-* debug websocket server issues
-* if the flash ws failover fails too (or stalls), but webworkers are available, failover to XMLHTTPRequest POSTs only when location changes.
 * integrate sessions correctly into aleph
+* if the flash ws failover fails too (or stalls), but webworkers are available, failover to XMLHTTPRequest POSTs only when location changes.
 * Add toggles to share location and get location updates (when off, add manual update buttons)
 * Google Maps integration
 * Add app cache support to speedup load times and allow for intermittent connections
@@ -77,15 +86,23 @@ You can also use screen:
 
 Start a nailgun (which will also open a repl),
 run the following command from the project root:
+
     script/nailgun
+
 You can also run a rlwrap'd REPL that VimClojure can connect to:
+
     lein repl
+
 And then call the Nailgun server function:
+
     (runnail)
+
 or more commonly,
+
     (def nail (runnail))
 
 Here are helpful commands
+
     * \rt - run tests in the given namespace
     * \lw - lookup word
     * \li - lookup interactive
@@ -103,13 +120,16 @@ Here are helpful commands
 
 ### Paredit.vim tips
 
-I also make use of the paredit.vim file from the slimv.vim plugin. This assumes your <leader> is \
+I also make use of the paredit.vim file from the slimv.vim plugin. This assumes your <leader> is `\`
+
     * :call ToggleParedit - toggle it on and off.
     * \W wrap in paren (works with visual selection too)
     * \J join paren - (a)(b) -> (a b)
     * \O split paren - (a b) -> (a)(b)
     * \S splice paren - ((a b)) -> (a b)
+
 Wrapping can also be tailored, and used on a visual block:
+
     * \w"
     * \w[
     * \w(
@@ -119,6 +139,11 @@ Wrapping can also be tailored, and used on a visual block:
 
 From the project root, `./script/lazytest` will run all the tests.
 To start a test watcher, `./script/lazytest-watch`
+
+### Generating the docs
+
+From the project root, `lein marg` will generate literate documentation.  
+`lein autodoc` will generate basic API docs.
 
 
 License

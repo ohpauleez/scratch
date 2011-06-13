@@ -5,24 +5,22 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo
             :comments "See the notice in README.md or details in LICENSE.html"}
-  :dependencies [;[org.clojure/clojure "1.3.0-master-SNAPSHOT"]
-                 [org.clojure/clojure "1.2.1"]
-                 [aleph "0.1.5-SNAPSHOT"]
+  :dependencies [[aleph "0.1.5-SNAPSHOT"]
                  [net.cgrand/moustache "1.0.0"]
                  [ring/ring-core "0.3.8"]
                  ;[clj-json "0.3.1"]
                  [com.eaio.uuid/uuid "3.2"]]
   :dev-dependencies [[vimclojure/server "2.3.0-SNAPSHOT"]
-                     [org.clojure/clojure-contrib "1.2.0"]
-                     [org.clojure/clojure "1.3.0-alpha7"]
-                     ;[org.clojure.contrib/repl-utils "1.3.0-alpha4"]
-                     ;[org.clojure.contrib/repl-utils "1.3.0-SNAPSHOT"]
                      [lein-cdt "1.0.0"] ; use lein cdt to attach
                      [marginalia "0.5.1"]
                      [org.clojars.rayne/autodoc "0.8.0-SNAPSHOT"]
-                     ;[lein-multi "1.0.0"]
+                     [lein-multi "1.1.0-SNAPSHOT"]
                      ;[org.clojars.mjul/lein-cuke "1.1.0"]
                      [com.stuartsierra/lazytest "2.0.0-SNAPSHOT"]]
+  :multi-deps {"1.2.1"  [[org.clojure/clojure "1.2.1"]
+                         [org.clojure/clojure-contrib "1.2.0"]]
+               "1.3"    [[org.clojure/clojure "1.3.0-alpha7"]
+                         [org.clojure.contrib/repl-utils "1.3.0-alpha4"]] }
   :repositories {"stuartsierra-releases" "http://stuartsierra.com/maven2"
                  "stuartsierra-snapshots" "http://stuartsierra.com/m2snapshots"}
   :autodoc {:name "GottaFind"

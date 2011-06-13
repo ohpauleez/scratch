@@ -48,7 +48,7 @@
   Notes:
     This is only meant for launching the server via the repl or lein-run"
   []
-  (let [ws (start-ws)
+  (let [ws (start-ws) ; this entire let block could be: ((juxt start-ws start-http))
         http (start-http)]
     [http ws]))
 

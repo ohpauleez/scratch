@@ -19,7 +19,7 @@
                      [com.stuartsierra/lazytest "2.0.0-SNAPSHOT"]]
   :multi-deps {"1.2.1"  [[org.clojure/clojure "1.2.1"]
                          [org.clojure/clojure-contrib "1.2.0"]]
-               "1.3"    [[org.clojure/clojure "1.3.0-alpha7"]
+               "1.3"    [[org.clojure/clojure "1.3-beta1"]
                          [org.clojure.contrib/repl-utils "1.3.0-alpha4"]] }
   :repositories {"stuartsierra-releases" "http://stuartsierra.com/maven2"
                  "stuartsierra-snapshots" "http://stuartsierra.com/m2snapshots"}
